@@ -1,4 +1,188 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-19T13:37:20+01:00</updated><id>http://localhost:4000/</id><title type="html">Hassene Chiha</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2018/07/18/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2018-07-18T12:44:39+01:00</published><updated>2018-07-18T12:44:39+01:00</updated><id>http://localhost:4000/jekyll/update/2018/07/18/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2018/07/18/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-20T09:10:45+01:00</updated><id>http://localhost:4000/</id><title type="html">Hassene Chiha</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">AI Basic Classification</title><link href="http://localhost:4000/jekyll/update/2018/07/19/AI-Basic-Classification.html" rel="alternate" type="text/html" title="AI Basic Classification" /><published>2018-07-19T14:53:39+01:00</published><updated>2018-07-19T14:53:39+01:00</updated><id>http://localhost:4000/jekyll/update/2018/07/19/AI-Basic-Classification</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2018/07/19/AI-Basic-Classification.html">&lt;p&gt;in this tutorial I’m going to talk about some of the basics of Artificial intelligence&lt;/p&gt;
+
+&lt;p&gt;This guide trains a neural network model to classify images of clothing, like sneakers and shirts.&lt;/p&gt;
+
+&lt;p&gt;This guide uses the Fashion MNIST dataset which contains 70,000 grayscale images in 10 categories. The images show individual articles of clothing at low resolution (28 by 28 pixels), as seen here:
+&lt;img src=&quot;http://127.0.0.1:4000/images/clothes.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;import-the-fashion-mnist-dataset&quot;&gt;Import the Fashion MNIST dataset&lt;/h2&gt;
+&lt;p&gt;We will use 60,000 images to train the network and 10,000 images to evaluate how accurately the network learned to classify images. You can access the Fashion MNIST directly from TensorFlow, just import and load the data:&lt;/p&gt;
+
+&lt;p&gt;Loading the dataset returns four NumPy arrays:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The train_images and train_labels arrays are the training set—the data the model uses to learn.&lt;/li&gt;
+  &lt;li&gt;The model is tested against the test set, the test_images, and test_labels arrays.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The images are 28x28 NumPy arrays, with pixel values ranging between 0 and 255. The labels are an array of integers, ranging from 0 to 9. These correspond to the class of clothing the image represents:
+&lt;strong&gt;(train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Label&lt;/th&gt;
+      &lt;th&gt;Class&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;T-shirt/top&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Trouser&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Pullover&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Dress&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Coat&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;Sandal&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;Shirt&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;Sneaker&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;8&lt;/td&gt;
+      &lt;td&gt;Bag&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;Ankle boot&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Each image is mapped to a single label. Since the class names are not included with the dataset, store them here to use later when plotting the images:&lt;/p&gt;
+
+&lt;p&gt;class_names = [‘T-shirt/top’, ‘Trouser’, ‘Pullover’, ‘Dress’, ‘Coat’, 
+               ‘Sandal’, ‘Shirt’, ‘Sneaker’, ‘Bag’, ‘Ankle boot’]&lt;/p&gt;
+&lt;h2 id=&quot;explore-the-data&quot;&gt;Explore the data&lt;/h2&gt;
+
+&lt;p&gt;Let’s explore the format of the dataset before training the model. The following shows there are 60,000 images in the training set, with each image represented as 28 x 28 pixels:&lt;/p&gt;
+
+&lt;p&gt;the command &lt;strong&gt;train_images.shape&lt;/strong&gt; returns 60.000&lt;/p&gt;
+
+&lt;p&gt;Likewise, there are 60,000 labels in the training set:&lt;/p&gt;
+
+&lt;p&gt;we can also use this command : 
+&lt;strong&gt;len(train_labels)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;preprocess-the-data&quot;&gt;Preprocess the data&lt;/h2&gt;
+&lt;p&gt;The data must be preprocessed before training the network. If you inspect the first image in the training set, you will see that the pixel values fall in the range of 0 to 255:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;plt.figure()&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;plt.imshow(train_images[1])&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;plt.colorbar()&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;plt.gca().grid(False)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We scale these values to a range of 0 to 1 before feeding to the neural network model. For this, cast the datatype of the image components from an integer to a float, and divide by 255. Here’s the function to preprocess the images:&lt;/p&gt;
+
+&lt;p&gt;It’s important that the training set and the testing set are preprocessed in the same way:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;rain_images = train_images / 255.0&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;test_images = test_images / 255.0&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We can display the first 25 images from the training set and display the class name below each image.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;import matplotlib.pyplot as plt&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;%matplotlib inline&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;plt.figure(figsize=(10,10))&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;for i in range(25):&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;plt.subplot(5,5,i+1)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;plt.xticks([])&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;plt.yticks([])&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;plt.grid(‘off’)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;plt.imshow(train_images[i], cmap=plt.cm.binary)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;plt.xlabel(class_names[train_labels[i]])&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;build-the-model&quot;&gt;Build the model&lt;/h2&gt;
+&lt;p&gt;Building the neural network requires configuring the layers of the model, then compiling the model.&lt;/p&gt;
+
+&lt;h3 id=&quot;setup-the-layers&quot;&gt;Setup the layers&lt;/h3&gt;
+&lt;p&gt;The basic building block of a neural network is the layer. Layers extract representations from the data fed into them. And, hopefully, these representations are more meaningful for the problem at hand.
+Most of deep learning consists of chaining together simple layers. Most layers, like tf.keras.layers.Dense, have parameters that are learned during training.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;model = keras.Sequential([&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;keras.layers.Flatten(input_shape=(28, 28)),&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;keras.layers.Dense(128, activation=tf.nn.relu),&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;keras.layers.Dense(10, activation=tf.nn.softmax)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;])&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The first layer in this network, tf.keras.layers.Flatten, transforms the format of the images from a 2d-array (of 28 by 28 pixels), to a 1d-array of 28 * 28 = 784 pixels. Think of this layer as unstacking rows of pixels in the image and lining them up. This layer has no parameters to learn; it only reformats the data.&lt;/p&gt;
+
+&lt;p&gt;After the pixels are flattened, the network consists of a sequence of two tf.keras.layers.Dense layers. These are densely-connected, or fully-connected, neural layers. The first Dense layer has 128 nodes (or neurons). The second (and last) layer is a 10-node softmax layer—this returns an array of 10 probability scores that sum to 1. Each node contains a score that indicates the probability that the current image belongs to one of the 10 digit classes.&lt;/p&gt;
+
+&lt;h3 id=&quot;compile-the-model&quot;&gt;Compile the model&lt;/h3&gt;
+
+&lt;p&gt;Before the model is ready for training, it needs a few more settings. These are added during the model’s compile step:&lt;/p&gt;
+
+&lt;p&gt;Loss function —This measures how accurate the model is during training. We want to minimize this function to “steer” the model in the right direction.
+Optimizer —This is how the model is updated based on the data it sees and its loss function.
+Metrics —Used to monitor the training and testing steps. The following example uses accuracy, the fraction of the images that are correctly classified.&lt;/p&gt;
+
+&lt;h3 id=&quot;train-the-model&quot;&gt;Train the model&lt;/h3&gt;
+
+&lt;p&gt;Training the neural network model requires the following steps:&lt;/p&gt;
+
+&lt;p&gt;Feed the training data to the model—in this example, the train_images and train_labels arrays.
+The model learns to associate images and labels.
+We ask the model to make predictions about a test set—in this example, the test_images array. We verify that the predictions match the labels from the test_labels array.&lt;/p&gt;
+
+&lt;p&gt;To start training, call the model.fit method—the model is “fit” to the training data:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;model.fit(train_images, train_labels, epochs=5)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;As the model trains, the loss and accuracy metrics are displayed. This model reaches an accuracy of about 0.88 (or 88%) on the training data.&lt;/p&gt;
+
+&lt;h3 id=&quot;evaluate-accuracy&quot;&gt;Evaluate accuracy&lt;/h3&gt;
+
+&lt;p&gt;Next, compare how the model performs on the test dataset:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;test_loss, test_acc = model.evaluate(test_images, test_labels)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;​&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;print(‘Test accuracy:’, test_acc)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;It turns out, the accuracy on the test dataset is a little less than the accuracy on the training dataset. This gap between training accuracy and test accuracy is an example of overfitting. Overfitting is when a machine learning model performs worse on new data than on their training data.&lt;/p&gt;</content><author><name></name></author><summary type="html">in this tutorial I’m going to talk about some of the basics of Artificial intelligence</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2018/07/18/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2018-07-18T12:44:39+01:00</published><updated>2018-07-18T12:44:39+01:00</updated><id>http://localhost:4000/jekyll/update/2018/07/18/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2018/07/18/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
 &lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
 
